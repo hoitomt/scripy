@@ -47,6 +47,14 @@
         cookie: true,
         xfbml: true
       });
+
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          console.log("FB Connected");
+          // user logged in and linked to app
+          // handle this case HERE
+        }
+     });
     };
 
     (function(d, s, id){
