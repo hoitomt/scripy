@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.16.min.js"></script>
-  <script type="text/javascript" src="js/user.js"></script>
+  <script type="text/javascript" src="build/bundle.js"></script>
 </head>
 
 <body>
@@ -38,34 +38,32 @@
   </div>
 
   <script type="text/javascript">
-    Parse.initialize("wfX72P5SsvoZNIyzskm30JS3KSmeztH0k1I10bFy", "82FZvofYqRM4d4OvOQLjwoSZT50JhB037nZIYZB6");
 
-    window.fbAsyncInit = function() {
-      Parse.FacebookUtils.init({
-        appId: "551368024959921",
-        status: true,
-        cookie: true,
-        xfbml: true
-      });
+    // window.fbAsyncInit = function() {
+    //   Parse.FacebookUtils.init({
+    //     appId: "551368024959921",
+    //     status: true,
+    //     cookie: true,
+    //     xfbml: true
+    //   });
 
-      FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-          console.log("FB Connected");
-          // user logged in and linked to app
-          // handle this case HERE
-        }
-     });
-    };
+    //   FB.getLoginStatus(function(response) {
+    //     if (response.status === 'connected') {
+    //       console.log("FB Connected");
+    //       // user logged in and linked to app
+    //       // handle this case HERE
+    //     }
+    //  });
+    // };
 
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+    // (function(d, s, id){
+    //   var js, fjs = d.getElementsByTagName(s)[0];
+    //   if (d.getElementById(id)) {return;}
+    //   js = d.createElement(s); js.id = id;
+    //   js.src = "//connect.facebook.net/en_US/all.js";
+    //   fjs.parentNode.insertBefore(js, fjs);
+    // }(document, 'script', 'facebook-jssdk'));
 
-    User.init();
   </script>
 </body>
 

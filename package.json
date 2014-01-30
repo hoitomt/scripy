@@ -1,0 +1,17 @@
+{
+  "name": "scripy",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hoitomt/scripy"
+  },
+  "dependencies": {
+    "gulp": "~3.5.0",
+    "gulp-coffee": "~1.4.0",
+    "gulp-livereload": "~0.2.0",
+    "gulp-concat": "~2.1.7",
+    "tiny-lr": "0.0.5",
+    "gulp-browserify": "~0.4.0",
+    "gulp-util": "~2.2.13"
+  }
+}
