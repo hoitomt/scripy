@@ -1,7 +1,8 @@
-InitializeParse = require('./initialize_parse')
-SeedData = require('./seed_data')
-User = require('./user')
-InitializeFacebook = require('./initialize_facebook')
+InitializeParse = require('./initialize_parse.coffee')
+SeedData = require('./seed_data.coffee')
+User = require('./user.coffee')
+InitializeFacebook = require('./initialize_facebook.coffee')
 
 InitializeParse()
-User()
+$ ->
+  console.log "Doc Ready"

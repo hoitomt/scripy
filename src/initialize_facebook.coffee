@@ -1,7 +1,24 @@
 module.exports = ->
 
   init = ->
+    @initializeFacebook()
     @logInWithFacebook()
+
+  initializeFacebook = ->
+    window.fbAsyncInit = ->
+      Parse.FacebookUtils.init
+        appId: "551368024959921"
+        status: true
+        cookie: true
+        xfbml: true
+
+      FB.getLoginStatus (response) ->
+        if (response.status == 'connected')
+          console.log("FB Connected")
+          # user logged in and linked to app
+          # handle this case HERE
+      return
+    return
 
   logInWithFacebook = ->
     $('#js-fb-login').on 'click', =>
