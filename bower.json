@@ -1,0 +1,12 @@
+{
+  "name": "scripy",
+  "version": "0.1.0",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "flight": "*",
+    "requirejs": "*"
+  }
+}

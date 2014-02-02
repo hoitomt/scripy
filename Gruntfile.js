@@ -5,15 +5,18 @@ module.exports = function(grunt){
         src: ['public/js', 'public/css']
       }
     },
-    browserify: {
-      dist: {
-        files: {
-          'public/js/bundle.js': ['src/**/*.coffee']
-        },
+    coffee: {
+      compile: {
         options: {
-          transform: ['coffeeify'],
-          debug: true
-        }
+          bare: true
+        },
+        files: [{
+          expand: true,
+          cwd: 'app/assets/javascripts',
+          src: ['**/*.coffee', '**/*.js'],
+          dest: 'public/js',
+          ext: '.js'
+        }]
       }
     },
     connect: {
@@ -26,36 +29,49 @@ module.exports = function(grunt){
 
       }
     },
+    copy: {
+      main: {
+        expand: true,
+        cwd: 'vendor/assets',
+        src: ['**/*.js', '**/*.css'],
+        dest: 'public/vendor/'
+      }
+    },
     sass: {
       dist: {
         files: [{
           expand: true,
-          cwd: 'styles',
+          cwd: 'app/assets/stylesheets',
           src: ['*.scss'],
-          dest: './public/css',
+          dest: 'public/css',
           ext: '.css'
         }]
       }
     },
     watch: {
       js: {
-        files: ['src/**/*.coffee'],
-        tasks: ['browserify']
+        files: ['app/assets/javascripts/**/*.coffee'],
+        tasks: ['coffee']
       },
       styles: {
-        files: ['styles/**/*.scss'],
+        files: ['app/assets/stylesheets/**/*.scss'],
         tasks: ['sass']
+      },
+      copy: {
+        files: ['vendor/assets/**'],
+        tasks: ['copy']
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('build', ['clean', 'sass', 'browserify'])
+  grunt.registerTask('build', ['clean', 'sass', 'coffee', 'copy'])
   grunt.registerTask('default', ['build', 'connect', 'watch']);
 
 };
