@@ -5,3 +5,6 @@ Application for managing scrip
 1. Install [Grunt](http://gruntjs.com/) and [Bower](http://bower.io/)
 2. Install the dependencies with `bower install`
 3. Run the watchers and server with `grunt`
+
+### Endpoint
+Visit [Scripy Github page](http://hoitomt.github.io/scripy/)
