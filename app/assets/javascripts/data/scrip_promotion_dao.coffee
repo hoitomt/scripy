@@ -7,19 +7,27 @@ define [
 ) ->
 
   scripPromotion = ->
+    @defaultAttrs
+      key: 'scripPromotions'
 
     @_key = (data) ->
       key = '' + data.business + data.denomination
       removeMe = /\'|\s|\//g
       key = key.replace(removeMe, '')
 
-    @saveScripPromotion = (ev, data) ->
-      data.key = @_key(data)
-      console.log "Saving #{data.key}"
-      @save(ev, data)
+    @saveScripPromotion = (ev, records) ->
+      data = records.data
+      for k, record of data
+        record.key = @_key(record)
+      @save(@attr.key, data)
+
+    @retrieveScripPromotions = (ev, data) ->
+      rawScripPromotions = @all(@attr.key)
+      scripPromotions = JSON.parse(rawScripPromotions)
+      @trigger 'event/scripPromotionsRetrieved', scripPromotions: scripPromotions
 
     @after 'initialize', ->
-      console.log "Init scripPromotion"
       @on 'event/daoSaveScripPromotion', @saveScripPromotion
+      @on 'event/retrieveScripPromotions', @retrieveScripPromotions
 
   defineComponent scripPromotion, dao

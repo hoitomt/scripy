@@ -2,15 +2,19 @@ define [], () ->
 
   localStorageDao = ->
 
-    @save = (ev, data) ->
+    @save = (key, data) ->
       @_functionRunner =>
-        localStorage.setItem(data.key, @_stringified(data))
+        localStorage.setItem(key, @_stringify(data))
 
-    @edit = (ev, data) ->
+    @edit = (data) ->
 
-    @delete = (ev, data) ->
+    @delete = (data) ->
       @_functionRunner =>
         localStorage.removeItem(key)
+
+    @all = (key) ->
+      @_functionRunner =>
+        localStorage.getItem(key)
 
     @clearDatabase = (ev, data) ->
       @_functionRunner =>
@@ -22,7 +26,7 @@ define [], () ->
       catch e
         console.log "ERROR #{e.message}"
 
-    @_stringified = (data) ->
+    @_stringify = (data) ->
       JSON.stringify(data)
 
     @after 'initialize', ->

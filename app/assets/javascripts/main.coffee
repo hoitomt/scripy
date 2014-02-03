@@ -2,15 +2,17 @@ define [
   'initialize_facebook',
   'user',
   'data/seed_data',
-  'ui/seed_data',
   'data/scrip_promotion_dao',
+  'ui/seed_data',
+  'ui/scrip_search'
   'parse',
 ], (
   InitializeFacebook,
   User,
   SeedData,
+  ScripPromotionDao,
   SeedDataUi,
-  ScripPromotionDao
+  ScripSearchUi
 ) ->
 
   init = ->
@@ -20,6 +22,7 @@ define [
     ScripPromotionDao.attachTo document
 
     $ ->
+      ScripSearchUi.attachTo '#js-scrip-search'
 
   return {
     init: ->

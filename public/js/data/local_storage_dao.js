@@ -1,18 +1,25 @@
 define([], function() {
   var localStorageDao;
   return localStorageDao = function() {
-    this.save = function(ev, data) {
+    this.save = function(key, data) {
       return this._functionRunner((function(_this) {
         return function() {
-          return localStorage.setItem(data.key, _this._stringified(data));
+          return localStorage.setItem(key, _this._stringify(data));
         };
       })(this));
     };
-    this.edit = function(ev, data) {};
-    this["delete"] = function(ev, data) {
+    this.edit = function(data) {};
+    this["delete"] = function(data) {
       return this._functionRunner((function(_this) {
         return function() {
           return localStorage.removeItem(key);
+        };
+      })(this));
+    };
+    this.all = function(key) {
+      return this._functionRunner((function(_this) {
+        return function() {
+          return localStorage.getItem(key);
         };
       })(this));
     };
@@ -32,7 +39,7 @@ define([], function() {
         return console.log("ERROR " + e.message);
       }
     };
-    this._stringified = function(data) {
+    this._stringify = function(data) {
       return JSON.stringify(data);
     };
     return this.after('initialize', function() {

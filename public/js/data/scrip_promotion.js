@@ -1,1 +1,0 @@
-scrip_promotion.coffee;

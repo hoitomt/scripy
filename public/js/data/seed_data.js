@@ -4,6 +4,7 @@ define(['flight/lib/component'], function(defineComponent) {
     this.defaultAttrs;
     this.seedDatabase = function(ev, data) {
       var fileNameUrl;
+      console.log("Seed the Database");
       fileNameUrl = 'data/2013_2014_scrip.json';
       return $.get(fileNameUrl, (function(_this) {
         return function(data) {
@@ -12,14 +13,13 @@ define(['flight/lib/component'], function(defineComponent) {
       })(this));
     };
     this.saveRecords = function(data) {
-      var k, record;
-      for (k in data) {
-        record = data[k];
-        $(document).trigger('event/daoSaveScripPromotion', record);
-      }
+      return $(document).trigger('event/daoSaveScripPromotion', {
+        data: data
+      });
     };
     return this.after('initialize', function() {
-      return this.on('event/seedDatabase', this.seedDatabase);
+      this.on('event/seedDatabase', this.seedDatabase);
+      return this.seedDatabase();
     });
   };
   return defineComponent(seedData);
