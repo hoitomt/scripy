@@ -2,7 +2,6 @@
 Application for managing scrip
 
 ### To run
-1. Run it on your favorite webserver
-2. Set up a coffeescript file watcher
-
-    coffee -cw -o js src
+1. Install [Grunt](http://gruntjs.com/) and [Bower](http://bower.io/)
+2. Install the dependencies with `bower install`
+3. Run the watchers and server with `grunt`
