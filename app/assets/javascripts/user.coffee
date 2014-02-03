@@ -22,6 +22,5 @@ define [
           logError(user, error)
 
     @after 'initialize', ->
-      console.log("Initialize User")
 
   defineComponent user

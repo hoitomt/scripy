@@ -15,7 +15,7 @@
   <script src="vendor/javascripts/require.config.js"></script>
   <script type="text/javascript">
     require(['js/main.js'], function(main) {
-      console.log("All is well");
+      main.init()
     }, function(error) {
       console.log("Requirejs Error: ", error);
     })

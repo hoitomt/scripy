@@ -1,20 +1,29 @@
-define [
-  'flight/lib/component'
-], (
-  defineComponent
-) ->
+define [], () ->
 
   localStorageDao = ->
 
-    @save = ->
+    @save = (ev, data) ->
+      @_functionRunner =>
+        localStorage.setItem(data.key, @_stringified(data))
 
-    @_key = ->
+    @edit = (ev, data) ->
 
+    @delete = (ev, data) ->
+      @_functionRunner =>
+        localStorage.removeItem(key)
+
+    @clearDatabase = (ev, data) ->
+      @_functionRunner =>
+        localStorage.clear()
+
+    @_functionRunner = (localStorageFunction) ->
+      try
+        localStorageFunction()
+      catch e
+        console.log "ERROR #{e.message}"
+
+    @_stringified = (data) ->
+      JSON.stringify(data)
 
     @after 'initialize', ->
-      @on 'event/daoSave', @save
-      @on 'event/daoClear', @clear
-      @on 'event/daoEdit', @edit
-      @on 'event/daoDelete', @delete
-
-  defineComponent localStorageDao
+      @on 'event/daoClearDatabase', @clearDatabase
