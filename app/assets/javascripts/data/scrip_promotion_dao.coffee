@@ -1,9 +1,11 @@
 define [
   'flight/lib/component',
-  'data/local_storage_dao'
+  'data/local_storage_dao',
+  'value_objects/scrip_promotion'
 ], (
   defineComponent,
-  dao
+  dao,
+  ScripPromotion
 ) ->
 
   scripPromotion = ->
@@ -35,10 +37,8 @@ define [
       @trigger 'event/scripPromotionsRetrieved', scripPromotions: @scripPromotions()
 
     @retrieveScripPromotion = (ev, data) ->
-      console.log "retrieveScripPromotion", data
       scripPromotion = @scripPromotionsObj()[data]
-      console.log "scripPromotionRetrieved", scripPromotion
-      $(document).trigger 'event/scripPromotionRetrieved', data: scripPromotion
+      @trigger 'event/scripPromotionRetrieved', scripPromotion: new ScripPromotion(scripPromotion)
 
     @after 'initialize', ->
       @on 'event/daoSaveScripPromotion', @saveScripPromotion

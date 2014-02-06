@@ -7,7 +7,7 @@ define(['initialize_facebook', 'user', 'data/seed_data', 'data/scrip_promotion_d
     ScripPromotionDao.attachTo(document);
     return $(function() {
       UiScripSearch.attachTo('#js-scrip-search');
-      return UiScripPromotion.attachTo('#detail-page');
+      return UiScripPromotion.attachTo('#detail-page .ui-content');
     });
   };
   return {

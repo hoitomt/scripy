@@ -5,22 +5,26 @@ define [
 ) ->
 
   scripPromotion = ->
+    @defaultAttrs
+      template: ''
 
-    @setClickHandler = ->
-      key = @$node.data('scrip-key')
-      @select('a').on 'click', (e) =>
-        console.log "that tickles", key
+    @getTemplate = ->
+      @attr.template = @$node.html()
 
-    @getScripData = ->
-      $(document).trigger 'event/retrieveScripPromotion', key
+    @getScripData = (ev, data) ->
+      console.log "Scrip Promotion - Get Scrip Data", data
+      $(document).trigger 'event/retrieveScripPromotion', data.key
 
     @updateUi = (ev, data) ->
-      console.log "Update UI", data
+      scripPromotion = data.scripPromotion
+      console.log "Update UI", data.scripPromotion
+      rendered = Mustache.render(@attr.template, scripPromotion.toJson())
+      @$node.html(rendered)
 
     @after 'initialize', ->
-      console.log "Initialize Scrip Promotion", @$node.data('scrip-key')
-      @setClickHandler()
-      # @on document, 'event/scriptPromotionRetrieved', @updateUi
-      # @getScripData()
+      console.log "Initialize Scrip Promotions", @attr
+      @getTemplate()
+      @on document, 'event/scripDetailSelected', @getScripData
+      @on document, 'event/scripPromotionRetrieved', @updateUi
 
   defineComponent scripPromotion

@@ -5,8 +5,8 @@ define [
   'data/scrip_promotion_dao',
   'ui/seed_data',
   'ui/scrip_search'
-  'ui/scrip_promotion',
-  'parse',
+  'ui/scrip_promotion'
+  'parse'
 ], (
   InitializeFacebook,
   User,
@@ -23,14 +23,9 @@ define [
     UiSeedData.attachTo document
     ScripPromotionDao.attachTo document
 
-    $(document).on 'pagecontainershow', ->
-      UiScripPromotion.attachTo "li.js-scrip-detail"
-
-    $(document).on "pagecontainertransition", (event, ui) ->
-      console.log "Page transition event"
-
     $ ->
       UiScripSearch.attachTo '#js-scrip-search'
+      UiScripPromotion.attachTo '#detail-page'
 
   return {
     init: ->
