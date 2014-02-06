@@ -1,7 +1,16 @@
 define(['flight/lib/component'], function(defineComponent) {
   var scripSearch;
   scripSearch = function() {
-    this.defaultAttrs;
+    this.defaultAttrs({
+      itemSelector: 'li a'
+    });
+    this.setListHandlers = function() {
+      return this.select('itemSelector').on('click', function(ev) {
+        var key;
+        key = $(this).data('scrip-key');
+        return $(document).trigger('event/retrieveScripPromotion', key);
+      });
+    };
     this.populateList = function(ev, data) {
       var k, scripPromotion, _ref;
       _ref = data.scripPromotions;
@@ -10,15 +19,17 @@ define(['flight/lib/component'], function(defineComponent) {
         this.$node.append(this._listElement(scripPromotion));
       }
       this.$node.listview('refresh');
-      return this.$node.trigger('updateLayout');
+      this.$node.trigger('updateLayout');
+      return this.setListHandlers();
     };
     this._listElement = function(scripPromotion) {
-      var classAttr, key, li, link, text;
+      var classAttr, data, key, li, link, text;
       key = scripPromotion.key;
       text = "" + scripPromotion.business + " $" + scripPromotion.denomination;
-      classAttr = "class=\"ui-screen-hidden\"";
-      link = "href=\"scrip_promotions/show.html?id=" + key + "\"";
-      return li = "<li " + classAttr + "><a " + link + ">" + text + "</a></li>";
+      classAttr = 'class="ui-screen-hidden js-scrip-detail"';
+      link = "href=\"scrip_promotions/show.html\"";
+      data = "data-scrip-key=\"" + key + "\"";
+      return li = "<li " + classAttr + " " + data + "><a " + link + ">" + text + "</a></li>";
     };
     return this.after('initialize', function() {
       this.on(document, 'event/scripPromotionsRetrieved', this.populateList);

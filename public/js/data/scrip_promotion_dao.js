@@ -19,17 +19,38 @@ define(['flight/lib/component', 'data/local_storage_dao'], function(defineCompon
       }
       return this.save(this.attr.key, data);
     };
-    this.retrieveScripPromotions = function(ev, data) {
-      var rawScripPromotions, scripPromotions;
+    this.scripPromotions = function() {
+      var rawScripPromotions;
       rawScripPromotions = this.all(this.attr.key);
-      scripPromotions = JSON.parse(rawScripPromotions);
+      return JSON.parse(rawScripPromotions);
+    };
+    this.scripPromotionsObj = function() {
+      var result, _i, _len, _ref;
+      result = {};
+      _ref = this.scripPromotions();
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        scripPromotion = _ref[_i];
+        result[scripPromotion.key] = scripPromotion;
+      }
+      return result;
+    };
+    this.retrieveScripPromotions = function(ev, data) {
       return this.trigger('event/scripPromotionsRetrieved', {
-        scripPromotions: scripPromotions
+        scripPromotions: this.scripPromotions()
+      });
+    };
+    this.retrieveScripPromotion = function(ev, data) {
+      console.log("retrieveScripPromotion", data);
+      scripPromotion = this.scripPromotionsObj()[data];
+      console.log("scripPromotionRetrieved", scripPromotion);
+      return $(document).trigger('event/scripPromotionRetrieved', {
+        data: scripPromotion
       });
     };
     return this.after('initialize', function() {
       this.on('event/daoSaveScripPromotion', this.saveScripPromotion);
-      return this.on('event/retrieveScripPromotions', this.retrieveScripPromotions);
+      this.on('event/retrieveScripPromotions', this.retrieveScripPromotions);
+      return this.on('event/retrieveScripPromotion', this.retrieveScripPromotion);
     });
   };
   return defineComponent(scripPromotion, dao);
