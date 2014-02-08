@@ -6,11 +6,14 @@
   <meta name="description" content="My Parse App">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="vendor/jquery-mobile/jquery.mobile.min.css" />
+  <link rel="stylesheet" href="css/zocial/zocial.css" />
+  <link rel="stylesheet" href="css/styles.css" />
 
   <!-- Load jquery and jquery-mobile early can be loaded early to prevent FOUC -->
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
-  <script src="vendor/mustache/mustache.js"></script>
+  <script src="vendor/javascripts/mustache/mustache.js"></script>
+  <script src="vendor/javascripts/hello/dist/hello.all.min.js"></script>
   <script src="vendor/javascripts/requirejs/require.js"></script>
   <script src="vendor/javascripts/require.config.js"></script>
   <script type="text/javascript">
@@ -23,6 +26,7 @@
 </head>
 
 <body>
+  <div id="fb-root"></div>
 
   <div id="home-page" data-role="page" data-dom-cache="true">
     <div data-role="header">
@@ -31,6 +35,12 @@
     <div role="main" class="ui-content">
       <p><a href="seed_database.html" data-prefetch="true">Seed Database</a></p>
       <p><a href="#search-page">Search Page</a></p>
+      <h3>Login</h3>
+      <ul id="social-login-links">
+        <li><a class="zocial icon google">Sign in with Google</a></li>
+        <li><a class="zocial icon twitter">Sign in with Twitter</a></li>
+        <li><a id="social-login-facebook" class="zocial icon facebook">Sign in with Facebook</a></li>
+      </ul>
     </div>
   </div>
   <div id="search-page" data-role="page" data-add-back-btn="true" data-dom-cache="true">
@@ -42,10 +52,10 @@
       <ul id="js-scrip-search" data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search scrips..."></ul>
     </div>
   </div>
-  <div id="detail-page" data-role="page" data-add-back-btn="true" data-dom-cache="true">
-    <div data-role="header">
-      <a href="#" data-rel="back" class="ui-btn-left ui-alt-icon ui-nodisc-icon ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">Back</a>
-      <h1>Show</h1>
+  <div id="detail-page" data-role="page" data-add-back-btn="true">
+    <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <a href="#" data-rel="back" class="ui-btn-left ui-alt-icon ui-nodisc-icon ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Back</a>
+      <h1 class="ui-title" role="heading" aria-level="1">{{name}}</h1>
     </div>
     <div role="main" class="ui-content">
       <p>Content</p>
@@ -57,14 +67,22 @@
 
 
   <script type="text/javascript">
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : "551368024959921",
+          status     : true,
+          cookie     : true,
+          xfbml      : true
+        });
+      };
 
-    // (function(d, s, id){
-    //   var js, fjs = d.getElementsByTagName(s)[0];
-    //   if (d.getElementById(id)) {return;}
-    //   js = d.createElement(s); js.id = id;
-    //   js.src = "//connect.facebook.net/en_US/all.js";
-    //   fjs.parentNode.insertBefore(js, fjs);
-    // }(document, 'script', 'facebook-jssdk'));
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 
   </script>
 </body>

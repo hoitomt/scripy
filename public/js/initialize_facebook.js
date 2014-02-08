@@ -2,20 +2,13 @@ define(['flight/lib/component'], function(defineComponent) {
   var initializeFacebook;
   initializeFacebook = function() {
     this.initializeFacebookScript = function() {
-      window.fbAsyncInit = function() {
-        Parse.FacebookUtils.init({
-          appId: "551368024959921",
-          status: true,
-          cookie: true,
-          xfbml: true
-        });
-        FB.getLoginStatus(function(response) {
-          if (response.status === 'connected') {
-            return console.log("FB Connected");
-          }
-        });
-      };
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          return console.log("FB Connected");
+        }
+      });
     };
+    return;
     this.logInWithFacebook = function() {
       return $('#js-fb-login').on('click', (function(_this) {
         return function() {

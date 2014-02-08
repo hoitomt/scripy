@@ -1,5 +1,6 @@
 define [
-  'initialize_facebook',
+  # 'initialize_facebook',
+  'authentication'
   'user',
   'data/seed_data',
   'data/scrip_promotion_dao',
@@ -8,7 +9,8 @@ define [
   'ui/scrip_promotion'
   'parse'
 ], (
-  InitializeFacebook,
+  # InitializeFacebook,
+  Authentication
   User,
   SeedData,
   ScripPromotionDao,
@@ -22,10 +24,12 @@ define [
     SeedData.attachTo document
     UiSeedData.attachTo document
     ScripPromotionDao.attachTo document
+    # InitializeFacebook.attachTo document
 
     $ ->
       UiScripSearch.attachTo '#js-scrip-search'
       UiScripPromotion.attachTo '#detail-page'
+      Authentication.attachTo '#social-login-links'
 
   return {
     init: ->

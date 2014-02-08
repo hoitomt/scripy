@@ -1,4 +1,4 @@
-define(['flight/lib/component', 'ui/scrip_promotion'], function(defineComponent, UiScripPromotion) {
+define(['flight/lib/component'], function(defineComponent) {
   var scripSearch;
   scripSearch = function() {
     this.defaultAttrs({

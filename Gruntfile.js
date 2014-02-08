@@ -35,6 +35,12 @@ module.exports = function(grunt){
         cwd: 'vendor/assets',
         src: ['**/*.js', '**/*.css'],
         dest: 'public/vendor/'
+      },
+      css: {
+        expand: true,
+        cwd: 'app/assets/stylesheets/zocial',
+        src: ['**/*'],
+        dest: 'public/css/zocial'
       }
     },
     sass: {

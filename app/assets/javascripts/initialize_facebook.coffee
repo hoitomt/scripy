@@ -8,13 +8,6 @@ define [
 
     @initializeFacebookScript = ->
 
-      window.fbAsyncInit = ->
-        Parse.FacebookUtils.init
-          appId: "551368024959921"
-          status: true
-          cookie: true
-          xfbml: true
-
         FB.getLoginStatus (response) ->
           if (response.status == 'connected')
             console.log("FB Connected")

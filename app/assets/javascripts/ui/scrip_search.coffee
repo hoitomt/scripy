@@ -1,9 +1,7 @@
 define [
-  'flight/lib/component',
-  'ui/scrip_promotion'
+  'flight/lib/component'
 ], (
-  defineComponent,
-  UiScripPromotion
+  defineComponent
 ) ->
 
   scripSearch = ->
