@@ -6,6 +6,13 @@ define(['flight/lib/component'], function(defineComponent) {
       twitterLoginButton: '#social-login-twitter',
       fbLoginButton: '#social-login-facebook'
     });
+    this.initHelloJs = function() {
+      return hello.init({
+        facebook: '551368024959921'
+      }, {
+        redirect_uri: 'index.html'
+      });
+    };
     this.setClickHandlers = function() {
       return this.select('fbLoginButton').on('click', function() {
         console.log("FB Login");
@@ -13,6 +20,7 @@ define(['flight/lib/component'], function(defineComponent) {
       });
     };
     return this.after('initialize', function() {
+      this.initHelloJs();
       return this.setClickHandlers();
     });
   };
