@@ -2,13 +2,14 @@ define(['flight/lib/component'], function(defineComponent) {
   var initializeFacebook;
   initializeFacebook = function() {
     this.initializeFacebookScript = function() {
-      FB.getLoginStatus(function(response) {
+      return FB.Event.subscribe('auth.authResponseChange', function(response) {
         if (response.status === 'connected') {
-          return console.log("FB Connected");
+          return console.log("Logged In");
+        } else {
+          return FB.login();
         }
       });
     };
-    return;
     this.logInWithFacebook = function() {
       return $('#js-fb-login').on('click', (function(_this) {
         return function() {
@@ -33,8 +34,7 @@ define(['flight/lib/component'], function(defineComponent) {
       });
     };
     return this.after('initialize', function() {
-      this.initializeFacebookScript();
-      return this.logInWithFacebook();
+      return this.initializeFacebookScript();
     });
   };
   return defineComponent(initializeFacebook);

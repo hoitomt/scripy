@@ -7,14 +7,11 @@ define [
   initializeFacebook = ->
 
     @initializeFacebookScript = ->
-
-        FB.getLoginStatus (response) ->
-          if (response.status == 'connected')
-            console.log("FB Connected")
-            # user logged in and linked to app
-            # handle this case HERE
-        return
-      return
+      FB.Event.subscribe 'auth.authResponseChange', (response) ->
+        if response.status is 'connected'
+          console.log "Logged In"
+        else
+          FB.login()
 
     @logInWithFacebook = ->
       $('#js-fb-login').on 'click', =>
@@ -32,6 +29,6 @@ define [
 
     @after 'initialize', ->
       @initializeFacebookScript()
-      @logInWithFacebook()
+      # @logInWithFacebook()
 
   defineComponent initializeFacebook
