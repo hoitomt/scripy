@@ -13,8 +13,10 @@ require.config({
     }
   },
   paths: {
+    jquery: jQuery,
     "es5-shim": "../vendor/javascripts/es5-shim/es5-shim",
     "es5-sham": "../vendor/javascripts/es5-shim/es5-sham",
-    parse: "../vendor/parse/parse-1.2.16.min"
+    parse: "../vendor/parse/parse-1.2.16.min",
+    "jquery-cookie": "../vendor/javascripts/jquery-cookie/jquery.cookie"
   }
 });

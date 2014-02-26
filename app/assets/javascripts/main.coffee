@@ -1,7 +1,10 @@
+# Workaround for dependencies that want jquery from requirejs
+define 'jquery', [], ->
+  return jQuery
+
 define [
-  'initialize_facebook',
   'authentication'
-  'user',
+  'data/user',
   'data/seed_data',
   'data/scrip_promotion_dao',
   'ui/seed_data',
@@ -9,7 +12,6 @@ define [
   'ui/scrip_promotion'
   'parse'
 ], (
-  InitializeFacebook,
   Authentication
   User,
   SeedData,
@@ -24,7 +26,7 @@ define [
     SeedData.attachTo document
     UiSeedData.attachTo document
     ScripPromotionDao.attachTo document
-    InitializeFacebook.attachTo document
+    User.attachTo document
 
     $ ->
       UiScripSearch.attachTo '#js-scrip-search'

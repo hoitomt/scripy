@@ -9,6 +9,7 @@
     "flight": "*",
     "hello": "*",
     "mustache": "*",
-    "requirejs": "*"
+    "requirejs": "*",
+    "jquery-cookie": "*"
   }
 }

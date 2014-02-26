@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="css/styles.css" />
 
   <!-- Load jquery and jquery-mobile early can be loaded early to prevent FOUC -->
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
   <script src="vendor/javascripts/mustache/mustache.js"></script>
   <script src="vendor/javascripts/hello/dist/hello.all.min.js"></script>
   <script src="vendor/javascripts/requirejs/require.js"></script>
@@ -37,8 +37,6 @@
       <p><a href="#search-page">Search Page</a></p>
       <h3>Login</h3>
       <ul id="social-login-links">
-        <li><a class="zocial icon google">Sign in with Google</a></li>
-        <li><a class="zocial icon twitter">Sign in with Twitter</a></li>
         <li><a id="social-login-facebook" class="zocial icon facebook">Sign in with Facebook</a></li>
       </ul>
     </div>
@@ -67,22 +65,7 @@
 
 
   <script type="text/javascript">
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '551368024959921',
-        status     : true,
-        cookie     : true,
-        xfbml      : true
-      });
-    };
 
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
 
   </script>
 </body>

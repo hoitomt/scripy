@@ -6,29 +6,38 @@ define [
 
   authentication = ->
     @defaultAttrs
-      googleLoginButton: '#social-login-google'
       twitterLoginButton: '#social-login-twitter'
       fbLoginButton: '#social-login-facebook'
+      hoitomtFacebookApiKey: '247607278754772'
+      scripyFacebookApiKey: '551368024959921'
 
     @initHelloJs = ->
       hello.init
-        facebook: '551368024959921'
+        facebook: @facebookApiKey()
+        twitter: '586317858'
       ,
         redirect_uri: 'index.html'
 
-    # hello.init({
-    #   facebook : FACEBOOK_CLIENT_ID,
-    #   windows  : WINDOWS_CLIENT_ID,
-    #   google   : GOOGLE_CLIENT_ID
-    # },{redirect_uri:'redirect.html'});
+    @facebookApiKey = ->
+      if (/hoitomt\.fwd/).test(window.location.href)
+        @attr.hoitomtFacebookApiKey
+      else
+        @attr.scripyFacebookApiKey
 
     @setClickHandlers = ->
       @select('fbLoginButton').on 'click', ->
-        console.log "FB Login"
-        hello( 'facebook' ).login()
+        hello('facebook').login()
+      @select('twitterLoginButton').on 'click', ->
+        hello('twitter').login()
+
+    @handleAuthentication = ->
+      hello.on 'auth.login', (auth) =>
+        hello(auth.network).api('/me').success (profile) ->
+          $(document).trigger('successfulLogin', profile)
 
     @after 'initialize', ->
       @initHelloJs()
       @setClickHandlers()
+      @handleAuthentication()
 
   defineComponent authentication
