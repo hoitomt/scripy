@@ -32,13 +32,17 @@
     <div data-role="header">
       <h1>Scripy</h1>
     </div>
-    <div role="main" class="ui-content">
-      <p><a href="seed_database.html" data-prefetch="true">Seed Database</a></p>
-      <p><a href="#search-page">Search Page</a></p>
-      <h3>Login</h3>
-      <ul id="social-login-links">
-        <li><a id="social-login-facebook" class="zocial icon facebook">Sign in with Facebook</a></li>
-      </ul>
+    <div role="main" class="ui-content js-main-content">
+      <div class="hidden js-content-links">
+        <p><a href="seed_database.html" data-prefetch="true">Seed Database</a></p>
+        <p><a href="#search-page">Search Page</a></p>
+      </div>
+      <div class="hidden js-login-links">
+        <h3>Login</h3>
+        <ul id="social-login-links">
+          <li><a id="social-login-facebook" class="zocial icon facebook">Sign in with Facebook</a></li>
+        </ul>
+      </div>
     </div>
   </div>
   <div id="search-page" data-role="page" data-add-back-btn="true" data-dom-cache="true">

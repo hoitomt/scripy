@@ -2,3 +2,7 @@ ul#social-login-links li {
   display: inline;
   list-style-type: none;
   padding-right: 20px; }
+
+.hidden {
+  display: none;
+}

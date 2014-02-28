@@ -3,22 +3,28 @@ define 'jquery', [], ->
   return jQuery
 
 define [
-  'authentication'
+  'data/authentication'
   'data/user',
   'data/seed_data',
   'data/scrip_promotion_dao',
+  'data/session',
   'ui/seed_data',
   'ui/scrip_search'
-  'ui/scrip_promotion'
+  'ui/scrip_promotion',
+  'ui/login_links',
+  'ui/page_content',
   'parse'
 ], (
   Authentication
   User,
   SeedData,
   ScripPromotionDao,
+  Session
   UiSeedData,
   UiScripSearch,
-  UiScripPromotion
+  UiScripPromotion,
+  UiLoginLinks,
+  UiPageContent
 ) ->
 
   init = ->
@@ -27,11 +33,14 @@ define [
     UiSeedData.attachTo document
     ScripPromotionDao.attachTo document
     User.attachTo document
+    Session.attachTo document
 
     $ ->
       UiScripSearch.attachTo '#js-scrip-search'
       UiScripPromotion.attachTo '#detail-page'
-      Authentication.attachTo '#social-login-links'
+      UiLoginLinks.attachTo '.js-login-links'
+      UiPageContent.attachTo '.js-main-content'
+      Authentication.attachTo document
 
   return {
     init: ->

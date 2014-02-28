@@ -6,8 +6,6 @@ define [
 
   authentication = ->
     @defaultAttrs
-      twitterLoginButton: '#social-login-twitter'
-      fbLoginButton: '#social-login-facebook'
       hoitomtFacebookApiKey: '247607278754772'
       scripyFacebookApiKey: '551368024959921'
 
@@ -24,20 +22,19 @@ define [
       else
         @attr.scripyFacebookApiKey
 
-    @setClickHandlers = ->
-      @select('fbLoginButton').on 'click', ->
-        hello('facebook').login()
-      @select('twitterLoginButton').on 'click', ->
-        hello('twitter').login()
+    @login = (event, data) ->
+      hello(data.client).login()
 
     @handleAuthentication = ->
       hello.on 'auth.login', (auth) =>
-        hello(auth.network).api('/me').success (profile) ->
-          $(document).trigger('successfulLogin', profile)
+        hello(auth.network).api('/me').success (profile) =>
+          @trigger 'successfulLogin', profile
+        .error =>
+          @trigger 'logout'
 
     @after 'initialize', ->
       @initHelloJs()
-      @setClickHandlers()
       @handleAuthentication()
+      @on 'clickLoginLink', @login
 
   defineComponent authentication

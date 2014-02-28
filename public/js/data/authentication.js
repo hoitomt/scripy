@@ -21,21 +21,21 @@ define(['flight/lib/component'], function(defineComponent) {
       }
     };
     this.login = function(event, data) {
-      console.log("Auth Login");
       return hello(data.client).login();
     };
     this.handleAuthentication = function() {
       return hello.on('auth.login', (function(_this) {
         return function(auth) {
           return hello(auth.network).api('/me').success(function(profile) {
-            return $(document).trigger('successfulLogin', profile);
+            return _this.trigger('successfulLogin', profile);
+          }).error(function() {
+            return _this.trigger('logout');
           });
         };
       })(this));
     };
     return this.after('initialize', function() {
       this.initHelloJs();
-      this.setClickHandlers();
       this.handleAuthentication();
       return this.on('clickLoginLink', this.login);
     });
