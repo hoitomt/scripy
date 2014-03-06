@@ -13,6 +13,7 @@ define [
   'ui/scrip_promotion',
   'ui/login_links',
   'ui/page_content',
+  'ui/spinner'
   'parse'
 ], (
   Authentication
@@ -24,10 +25,13 @@ define [
   UiScripSearch,
   UiScripPromotion,
   UiLoginLinks,
-  UiPageContent
+  UiPageContent,
+  Spinner
 ) ->
 
   init = ->
+    Spinner.attachTo document
+    $(document).trigger 'startLoading' # Stop loading after authentication
     Parse.initialize("wfX72P5SsvoZNIyzskm30JS3KSmeztH0k1I10bFy", "82FZvofYqRM4d4OvOQLjwoSZT50JhB037nZIYZB6")
     SeedData.attachTo document
     UiSeedData.attachTo document

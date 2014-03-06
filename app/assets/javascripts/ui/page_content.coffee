@@ -12,16 +12,15 @@ define [
       userCookieKey: 'scripy_ua'
 
     @handleLogout = (ev, data) ->
-      console.log "Handle Logout"
       @select('loginLinks').show()
       @select('contentLinks').hide()
 
     @handleLogin = (ev, data) ->
-      console.log "Handle Login"
       @select('loginLinks').hide()
       @select('contentLinks').show()
 
     @after 'initialize', ->
+      @on document, 'notLoggedIn', @handleLogout
       @on document, 'logout', @handleLogout
       @on document, 'successfulLogin', @handleLogin
 

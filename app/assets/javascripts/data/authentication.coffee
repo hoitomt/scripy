@@ -27,13 +27,19 @@ define [
 
     @handleAuthentication = ->
       hello.on 'auth.login', (auth) =>
-        hello(auth.network).api('/me').success (profile) =>
-          @trigger 'successfulLogin', profile
-        .error =>
-          @trigger 'logout'
+        @retrieveFacebookProfile(auth)
+
+    @retrieveFacebookProfile = (auth={network: 'facebook'}) ->
+      hello(auth.network).api('/me').success (profile) =>
+        @trigger 'stopLoading'
+        @trigger 'successfulLogin', profile
+      .error =>
+        @trigger 'stopLoading'
+        @trigger 'notLoggedIn'
 
     @after 'initialize', ->
       @initHelloJs()
+      @retrieveFacebookProfile()
       @handleAuthentication()
       @on 'clickLoginLink', @login
 

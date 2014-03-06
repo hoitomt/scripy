@@ -7,16 +7,15 @@ define(['flight/lib/component', 'jquery-cookie'], function(defineComponent) {
       userCookieKey: 'scripy_ua'
     });
     this.handleLogout = function(ev, data) {
-      console.log("Handle Logout");
       this.select('loginLinks').show();
       return this.select('contentLinks').hide();
     };
     this.handleLogin = function(ev, data) {
-      console.log("Handle Login");
       this.select('loginLinks').hide();
       return this.select('contentLinks').show();
     };
     return this.after('initialize', function() {
+      this.on(document, 'notLoggedIn', this.handleLogout);
       this.on(document, 'logout', this.handleLogout);
       return this.on(document, 'successfulLogin', this.handleLogin);
     });
