@@ -11,17 +11,6 @@ define [
       loginLinks: '.js-login-links'
       userCookieKey: 'scripy_ua'
 
-    @initPageContent = ->
-      if @loggedIn()
-        @select('loginLinks').hide()
-        @select('contentLinks').show()
-      else
-        @select('loginLinks').show()
-        @select('contentLinks').hide()
-
-    @loggedIn = ->
-      $.cookie(@attr.userCookieKey)?
-
     @handleLogout = (ev, data) ->
       console.log "Handle Logout"
       @select('loginLinks').show()
@@ -33,7 +22,6 @@ define [
       @select('contentLinks').show()
 
     @after 'initialize', ->
-      @initPageContent()
       @on document, 'logout', @handleLogout
       @on document, 'successfulLogin', @handleLogin
 

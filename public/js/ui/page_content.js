@@ -6,18 +6,6 @@ define(['flight/lib/component', 'jquery-cookie'], function(defineComponent) {
       loginLinks: '.js-login-links',
       userCookieKey: 'scripy_ua'
     });
-    this.initPageContent = function() {
-      if (this.loggedIn()) {
-        this.select('loginLinks').hide();
-        return this.select('contentLinks').show();
-      } else {
-        this.select('loginLinks').show();
-        return this.select('contentLinks').hide();
-      }
-    };
-    this.loggedIn = function() {
-      return $.cookie(this.attr.userCookieKey) != null;
-    };
     this.handleLogout = function(ev, data) {
       console.log("Handle Logout");
       this.select('loginLinks').show();
@@ -29,7 +17,6 @@ define(['flight/lib/component', 'jquery-cookie'], function(defineComponent) {
       return this.select('contentLinks').show();
     };
     return this.after('initialize', function() {
-      this.initPageContent();
       this.on(document, 'logout', this.handleLogout);
       return this.on(document, 'successfulLogin', this.handleLogin);
     });
