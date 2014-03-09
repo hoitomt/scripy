@@ -39,7 +39,6 @@ define [
 
     @after 'initialize', ->
       @initHelloJs()
-      @retrieveFacebookProfile()
       @handleAuthentication()
       @on 'clickLoginLink', @login
 

@@ -1,16 +1,27 @@
-define(['flight/lib/component'], function(defineComponent) {
+define(['flight/lib/component', 'persistence/scrip_promotion'], function(defineComponent, PersistPromotion) {
   var seedData;
   seedData = function() {
     this.defaultAttrs;
     this.seedDatabase = function(ev, data) {
-      var fileNameUrl;
+      var query;
       console.log("Seed the Database");
-      fileNameUrl = 'data/2013_2014_scrip.json';
-      return $.get(fileNameUrl, (function(_this) {
-        return function(data) {
-          return _this.saveRecords(data);
+      query = PersistPromotion.all(window.timePeriod);
+      return query.find().then((function(_this) {
+        return function(results) {
+          if ((results != null) && results.length > 0) {
+            return _this.saveRecords(results);
+          } else {
+            return _this.promotionError("No Results");
+          }
+        };
+      })(this), (function(_this) {
+        return function(error) {
+          return _this.promotionError(error);
         };
       })(this));
+    };
+    this.promotionError = function(error) {
+      return alert("Error when trying to find a user " + error);
     };
     this.saveRecords = function(data) {
       return $(document).trigger('event/daoSaveScripPromotion', {

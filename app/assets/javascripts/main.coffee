@@ -6,7 +6,7 @@ define [
   'data/authentication'
   'data/user',
   'data/seed_data',
-  'data/scrip_promotion_dao',
+  'data/scrip_promotion',
   'data/session',
   'ui/seed_data',
   'ui/scrip_search'
@@ -14,7 +14,8 @@ define [
   'ui/login_links',
   'ui/page_content',
   'ui/spinner'
-  'parse'
+  'parse',
+  'data/constants'
 ], (
   Authentication
   User,

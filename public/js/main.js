@@ -2,7 +2,7 @@ define('jquery', [], function() {
   return jQuery;
 });
 
-define(['data/authentication', 'data/user', 'data/seed_data', 'data/scrip_promotion_dao', 'data/session', 'ui/seed_data', 'ui/scrip_search', 'ui/scrip_promotion', 'ui/login_links', 'ui/page_content', 'ui/spinner', 'parse'], function(Authentication, User, SeedData, ScripPromotionDao, Session, UiSeedData, UiScripSearch, UiScripPromotion, UiLoginLinks, UiPageContent, Spinner) {
+define(['data/authentication', 'data/user', 'data/seed_data', 'data/scrip_promotion', 'data/session', 'ui/seed_data', 'ui/scrip_search', 'ui/scrip_promotion', 'ui/login_links', 'ui/page_content', 'ui/spinner', 'parse', 'data/constants'], function(Authentication, User, SeedData, ScripPromotionDao, Session, UiSeedData, UiScripSearch, UiScripPromotion, UiLoginLinks, UiPageContent, Spinner) {
   var init;
   init = function() {
     Spinner.attachTo(document);

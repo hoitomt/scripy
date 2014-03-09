@@ -13,15 +13,18 @@ define [
       key: 'scripPromotions'
 
     @_key = (data) ->
-      key = '' + data.business + data.denomination
-      removeMe = /\'|\s|\//g
+      key = '' + data.time_period + data.business + data.denomination
+      removeMe = /[^0-9A-Za-z]+/g
       key = key.replace(removeMe, '')
 
     @saveScripPromotion = (ev, records) ->
       data = records.data
+      persistData = {}
       for k, record of data
-        record.key = @_key(record)
-      @save(@attr.key, data)
+        key = @_key(record.attributes)
+        record.attributes.key = key
+        persistData[key] = record.attributes
+      @save(@attr.key, persistData)
 
     @scripPromotions = ->
       rawScripPromotions = @all(@attr.key)
@@ -29,7 +32,7 @@ define [
 
     @scripPromotionsObj = ->
       result = {}
-      for scripPromotion in @scripPromotions()
+      for k, scripPromotion of @scripPromotions()
         result[scripPromotion.key] = scripPromotion
       return result
 

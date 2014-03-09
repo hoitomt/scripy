@@ -50,7 +50,6 @@ define(['flight/lib/component'], function(defineComponent) {
     };
     return this.after('initialize', function() {
       this.initHelloJs();
-      this.retrieveFacebookProfile();
       this.handleAuthentication();
       return this.on('clickLoginLink', this.login);
     });

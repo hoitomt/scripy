@@ -13,9 +13,13 @@ define(['flight/lib/component', 'jquery-cookie'], function(defineComponent) {
     this.handleLogin = function(event, data) {
       return $.cookie(this.attr.userCookieKey, data.id);
     };
+    this.setCurrentUser = function(event, data) {
+      return console.log("Session - set current user", data);
+    };
     return this.after('initialize', function() {
       this.on('successfulLogin', this.handleLogin);
-      return this.on('logout', this.logoutUser);
+      this.on('logout', this.logoutUser);
+      return this.on('userRetrievedFromDataStore', this.setCurrentUser);
     });
   };
   return defineComponent(session);
