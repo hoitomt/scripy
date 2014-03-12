@@ -11,14 +11,16 @@ define(['flight/lib/component', 'data/local_storage_dao', 'value_objects/scrip_p
       return key = key.replace(removeMe, '');
     };
     this.saveScripPromotion = function(ev, records) {
-      var data, k, key, persistData, record;
+      var data, k, key, persistData, record, values;
       data = records.data;
       persistData = {};
       for (k in data) {
         record = data[k];
         key = this._key(record.attributes);
         record.attributes.key = key;
-        persistData[key] = record.attributes;
+        values = record.attributes;
+        values['id'] = record.id;
+        persistData[key] = values;
       }
       return this.save(this.attr.key, persistData);
     };

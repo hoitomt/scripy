@@ -7,7 +7,6 @@ define(['parse'], function() {
   }, {
     all: function(time_period) {
       var query;
-      console.log("Get all Scrip Promotions");
       query = new Parse.Query(ScripPromotion);
       query.equalTo('time_period', time_period);
       return query;

@@ -8,6 +8,7 @@ define [
   'data/seed_data',
   'data/scrip_promotion',
   'data/session',
+  'data/user_promotion'
   'ui/seed_data',
   'ui/scrip_search'
   'ui/scrip_promotion',
@@ -21,7 +22,8 @@ define [
   User,
   SeedData,
   ScripPromotionDao,
-  Session
+  Session,
+  UserPromotion
   UiSeedData,
   UiScripSearch,
   UiScripPromotion,
@@ -39,6 +41,7 @@ define [
     ScripPromotionDao.attachTo document
     User.attachTo document
     Session.attachTo document
+    UserPromotion.attachTo document
 
     $ ->
       UiScripSearch.attachTo '#js-scrip-search'

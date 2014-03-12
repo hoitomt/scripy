@@ -9,6 +9,14 @@ define([], function() {
       return this.args || {};
     };
 
+    ScripPromotion.prototype.id = function() {
+      return this.parameters().id;
+    };
+
+    ScripPromotion.prototype.key = function() {
+      return this.parameters().key;
+    };
+
     ScripPromotion.prototype.business = function() {
       return this.parameters().business;
     };
@@ -38,7 +46,9 @@ define([], function() {
       return result = {
         name: this.business(),
         denomination: this.denominationDisplay(),
-        returnAmount: this.returnAmountPercent()
+        returnAmount: this.returnAmountPercent(),
+        key: this.key(),
+        id: this.id()
       };
     };
 

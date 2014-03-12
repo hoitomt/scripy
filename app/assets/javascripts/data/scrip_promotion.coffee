@@ -23,7 +23,9 @@ define [
       for k, record of data
         key = @_key(record.attributes)
         record.attributes.key = key
-        persistData[key] = record.attributes
+        values = record.attributes
+        values['id'] = record.id
+        persistData[key] = values
       @save(@attr.key, persistData)
 
     @scripPromotions = ->

@@ -59,10 +59,13 @@
       <h1 class="ui-title" role="heading" aria-level="1">{{name}}</h1>
     </div>
     <div role="main" class="ui-content">
-      <p>Content</p>
       <p>{{name}}</p>
       <p>{{denomination}}</p>
       <p>{{returnAmount}}</p>
+      <p class="js-add-promotion-link">
+        <a class="js-add-promotion-to-account" data-promotion_id={{id}} href="javascript:void(0);">Add to my account</a>
+      </p>
+      <p class="js-add-promotion-success hidden">{{name}} has been added to your account</p>
     </div>
   </div>
 

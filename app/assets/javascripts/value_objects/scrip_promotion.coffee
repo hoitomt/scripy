@@ -5,6 +5,12 @@ define [], () ->
     parameters: ->
       @args || {}
 
+    id: ->
+      @parameters().id
+
+    key: ->
+      @parameters().key
+
     business: ->
       @parameters().business
 
@@ -27,5 +33,7 @@ define [], () ->
         name: @business()
         denomination: @denominationDisplay()
         returnAmount: @returnAmountPercent()
+        key: @key()
+        id: @id()
 
   ScripPromotion
